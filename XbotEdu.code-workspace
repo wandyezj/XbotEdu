@@ -6,5 +6,8 @@
 		{
 			"path": "SeriouslyCommonLib"
 		}
-	]
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
 }
