@@ -72,7 +72,7 @@ public class DriveToPositionCommandTest extends BaseDriveTest {
                     command.execute();
                     engine.step(getForwardPower());
                     loops++;
-                    drive.distanceSensor.setDistance(engine.getDistance());
+                    pose.odometer.setDistance(engine.getDistance());
                     
                     asyncJob.onNewStep(
                         new LinearEnvironmentState(
@@ -94,7 +94,7 @@ public class DriveToPositionCommandTest extends BaseDriveTest {
         
         LinearEngine engine = new LinearEngine();
         
-        drive.distanceSensor.setDistance(0);
+        pose.odometer.setDistance(0);
         
         DriveToPositionCommand command = 
                 injector.getInstance(DriveToPositionCommand.class);
@@ -112,7 +112,7 @@ public class DriveToPositionCommandTest extends BaseDriveTest {
             counter++;
             
             // model change in position based on motor power
-            drive.distanceSensor.setDistance(engine.getDistance());
+            pose.odometer.setDistance(engine.getDistance());
             
             System.out.println("Loop: " 
                 + i 
@@ -138,21 +138,21 @@ public class DriveToPositionCommandTest extends BaseDriveTest {
         System.out.println("  with almost 0 velocity, and report that it is finished.");
         System.out.println("  It also must finish within 300 loops.");
         
-        double distance = drive.distanceSensor.getDistance();
+        double distance = pose.odometer.getDistance();
         boolean isNearGoal = (distance > target_distance - error_threshold) && (distance < target_distance + error_threshold); 
         boolean isLowLoopCount = counter < 300;
         boolean isSlow = (engine.getVelocity() > -0.1) && (engine.getVelocity() < 0.1);
         
         System.out.println("Your stats:");
         System.out.println("Loop count: " + (int)counter + ", Pass=" + isLowLoopCount);
-        System.out.println("Your command's final distance: " + drive.distanceSensor.getDistance() + ", Pass=" + isNearGoal);
+        System.out.println("Your command's final distance: " + pose.odometer.getDistance() + ", Pass=" + isNearGoal);
         System.out.println("Your command's final velocity: " + engine.getVelocity() + ", Pass=" + isSlow);
         System.out.println("Is your command finished: " + isFinished + ", Pass=" + isFinished);
         
         assertTrue("Verify command reports successfully finished", isFinished);
         command.end();
         assertEquals("Make sure robot is close to target position within " + error_threshold, 
-                target_distance, drive.distanceSensor.getDistance(), error_threshold);
+                target_distance, pose.odometer.getDistance(), error_threshold);
         assertEquals("Make sure robot has come to a stop, not just flying past the target position.", 
                 0.0, engine.getVelocity(), 0.1);
         
