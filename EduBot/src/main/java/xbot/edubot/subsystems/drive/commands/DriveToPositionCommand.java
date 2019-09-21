@@ -9,6 +9,8 @@ public class DriveToPositionCommand extends BaseCommand {
 
     DriveSubsystem drive;
     
+    double desiredDistance = 0;
+
     @Inject
     public DriveToPositionCommand(DriveSubsystem driveSubsystem) {
         this.drive = driveSubsystem;
@@ -17,6 +19,7 @@ public class DriveToPositionCommand extends BaseCommand {
     public void setTargetPosition(double position) {
         // This method will be called by the test, and will give you a goal distance.
         // You'll need to remember this target position and use it in your calculations.
+        desiredDistance = position;
     }
     
     @Override
@@ -32,6 +35,11 @@ public class DriveToPositionCommand extends BaseCommand {
         // - Gets the robot stop (or at least be moving really really slowly) at the target position
         
         // How you do this is up to you. If you get stuck, ask a mentor or student for some hints!
+    
+        double powerLeft = 1;
+        double powerRight = 1;
+
+        drive.tankDrive(powerLeft, powerRight);
     }
     
     @Override
