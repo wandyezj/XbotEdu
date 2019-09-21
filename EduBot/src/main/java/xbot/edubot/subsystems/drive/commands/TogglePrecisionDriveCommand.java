@@ -8,7 +8,8 @@ import xbot.edubot.subsystems.drive.DriveSubsystem;
 public class TogglePrecisionDriveCommand extends BaseCommand {
 
     DriveSubsystem drive;
-    
+    boolean finished = false;
+
     @Inject
     public TogglePrecisionDriveCommand(DriveSubsystem driveSubsystem) {
         drive = driveSubsystem;
@@ -24,6 +25,8 @@ public class TogglePrecisionDriveCommand extends BaseCommand {
         // 2) Create a TogglePrecisionMode() on the DriveSubsystem. The system will internally change
         //    the current mode.
         // In all of these cases you'll need to have the mode somehow affect the TankDrive method.
+
+        drive.togglePrecisionDrive();
     }
 
     @Override
@@ -32,6 +35,8 @@ public class TogglePrecisionDriveCommand extends BaseCommand {
         // best place to put the code.
     }
     
+
+
     @Override
     public boolean isFinished() {
         // Commands keep running until they are finished.
