@@ -34,7 +34,7 @@ public class BaseOrientationEngineTest extends BaseDriveTest {
 
     protected void setUpTestEnvironment(BaseCommand command, double initialYaw, double targetYaw) {
         engine = new RotationEngine(BASE_TIME_STEP, initialYaw, 0);
-        drive.gyro.setYaw(initialYaw);
+        mockRobotIO.setGyroHeading(initialYaw);
         this.targetYaw = targetYaw;
         this.currentRotationCommand = command;
     }
@@ -107,12 +107,12 @@ public class BaseOrientationEngineTest extends BaseDriveTest {
     protected void runRotationStep(RotationEngine engine) {
         engine.setPower(getRotationPower());
         engine.step();
-        drive.gyro.setYaw(engine.getOrientation());
+        mockRobotIO.setGyroHeading(engine.getOrientation());
     }
 
     protected void assertRotationTarget(RotationEngine engine, double targetHeading) {
         assertEquals("Make sure robot is close to target position within " + POSITION_ERROR_THRESHOLD, targetHeading,
-                drive.gyro.getYaw(), POSITION_ERROR_THRESHOLD);
+                pose.getCurrentHeading().getValue(), POSITION_ERROR_THRESHOLD);
         assertEquals("Make sure robot has come to a stop, not just flying past the target position.", 0.0,
                 engine.getVelocity(), VELOCITY_ERROR_THRESHOLD);
     }
