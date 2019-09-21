@@ -15,6 +15,7 @@ public class BObserveChatter extends BaseWPITest{
         log = Logger.getLogger(BObserveChatter.class);
         
         ChatCommandThatEnds cmd = injector.getInstance(ChatCommandThatEnds.class);
+        cmd.setRunWhenDisabled(true);
         cmd.start();
         XScheduler scheduler = injector.getInstance(XScheduler.class);
         

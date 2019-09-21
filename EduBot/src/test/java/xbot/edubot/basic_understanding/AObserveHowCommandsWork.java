@@ -17,15 +17,17 @@ public class AObserveHowCommandsWork extends BaseWPITest{
         
         // This is a simple command that just prints out what methods are called on it.
         ExampleCommand cmd = injector.getInstance(ExampleCommand.class);
+
+        // The Scheduler is an entity that looks at all "Started commands" and runs them until:
+        // - the command says it is done
+        // - some other command starts that wants to use the same subsystem
+        XScheduler scheduler = injector.getInstance(XScheduler.class);
         
         // There's many ways to start commands. Often, they are started by pressing a joystick
         // button, but for testing we can just force it to start.
         cmd.start();
         
-        // The Scheduler is an entity that looks at all "Started commands" and runs them until:
-        // - the command says it is done
-        // - some other command starts that wants to use the same subsystem
-        XScheduler scheduler = injector.getInstance(XScheduler.class);
+        
         
         // For a quick example, we'll just run the scheduler 10 times.
         // You should see the command do:
