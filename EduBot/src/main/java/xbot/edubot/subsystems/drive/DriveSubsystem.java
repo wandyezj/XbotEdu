@@ -13,9 +13,6 @@ import xbot.edubot.MockHeadingSensor;
 
 @Singleton
 public class DriveSubsystem extends BaseSubsystem {
-
-    public MockDistanceSensor distanceSensor;
-    public MockHeadingSensor gyro;
     
     public XCANTalon frontLeft;
     public XCANTalon frontRight;
@@ -26,10 +23,7 @@ public class DriveSubsystem extends BaseSubsystem {
 
     @Inject
     public DriveSubsystem(CommonLibFactory factory) {
-        // instantiate speed controllers and sensors here, save them as class members
-        distanceSensor = new MockDistanceSensor();
-        gyro = new MockHeadingSensor();
-        
+        // instantiate speed controllers and sensors here, save them as class members        
         frontLeft = factory.createCANTalon(1);
         rearLeft = factory.createCANTalon(3);
         frontRight = factory.createCANTalon(2);

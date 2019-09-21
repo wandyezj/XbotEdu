@@ -9,10 +9,12 @@ import xbot.common.controls.sensors.mock_adapters.MockFTCGamepad;
 import xbot.common.injection.BaseWPITest;
 import xbot.edubot.operator_interface.OperatorInterface;
 import xbot.edubot.subsystems.drive.DriveSubsystem;
+import xbot.edubot.subsystems.pose.PoseSubsystem;
 
 public class BaseDriveTest extends BaseWPITest {
 
     protected DriveSubsystem drive;
+    protected PoseSubsystem pose;
     OperatorInterface oi;
     
     MockFTCGamepad gamepad;
@@ -22,7 +24,7 @@ public class BaseDriveTest extends BaseWPITest {
         super.setUp();
         drive = this.injector.getInstance(DriveSubsystem.class);
         oi = this.injector.getInstance(OperatorInterface.class);
-
+        pose = this.injector.getInstance(PoseSubsystem.class);
         gamepad = (MockFTCGamepad)oi.gamepad;
     }
     

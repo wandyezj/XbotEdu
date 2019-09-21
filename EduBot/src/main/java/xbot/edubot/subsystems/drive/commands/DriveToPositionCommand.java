@@ -4,16 +4,19 @@ import com.google.inject.Inject;
 
 import xbot.common.command.BaseCommand;
 import xbot.edubot.subsystems.drive.DriveSubsystem;
+import xbot.edubot.subsystems.pose.PoseSubsystem;
 
 public class DriveToPositionCommand extends BaseCommand {
 
     DriveSubsystem drive;
+    PoseSubsystem pose;
     
     double desiredDistance = 0;
 
     @Inject
-    public DriveToPositionCommand(DriveSubsystem driveSubsystem) {
+    public DriveToPositionCommand(DriveSubsystem driveSubsystem, PoseSubsystem pose) {
         this.drive = driveSubsystem;
+        this.pose = pose;
     }
     
     public void setTargetPosition(double position) {
@@ -31,7 +34,7 @@ public class DriveToPositionCommand extends BaseCommand {
     public void execute() {
         // Here you'll need to figure out a technique that:
         // - Gets the robot to move to the target position 
-        // - Hint: use drive.distanceSensor.get() to find out where you are
+        // - Hint: use pose.getPosition() to find out where you are
         // - Gets the robot stop (or at least be moving really really slowly) at the target position
         
         // How you do this is up to you. If you get stuck, ask a mentor or student for some hints!
