@@ -8,7 +8,6 @@ import xbot.edubot.subsystems.drive.DriveSubsystem;
 public class TogglePrecisionDriveCommand extends BaseCommand {
 
     DriveSubsystem drive;
-    boolean finished = false;
 
     @Inject
     public TogglePrecisionDriveCommand(DriveSubsystem driveSubsystem) {
@@ -35,8 +34,6 @@ public class TogglePrecisionDriveCommand extends BaseCommand {
         // best place to put the code.
     }
     
-
-
     @Override
     public boolean isFinished() {
         // Commands keep running until they are finished.
