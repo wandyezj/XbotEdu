@@ -61,7 +61,7 @@ public class BaseOrientationEngineTest extends BaseDriveTest {
         for (int i = 0; i < MAX_ROTATION_CYCLES; i++) {
             runRotationStep(engine);
 
-            System.out.printf("Time:%.1f sec, TurningPower:%.2f, Velocity:%.2f, Yaw:%.2f \n", (double) i * BASE_TIME_STEP,
+            System.out.printf("Time:%.1f sec, TurningPower:%.2f, Velocity:%.2f, Yaw:%.2f\n", (double) i * BASE_TIME_STEP,
                     getRotationPower(), engine.getVelocity(), engine.getOrientation());
 
             if (currentRotationCommand.isFinished()) {
